@@ -1,0 +1,6 @@
+[submodule "frontend"]
+	path = frontend
+	url = git@github.com:Clubs-Council-IIITH/frontend.git
+[submodule "backend"]
+	path = backend
+	url = git@github.com:Clubs-Council-IIITH/backend.git
