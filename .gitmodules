@@ -1,6 +1,8 @@
 [submodule "frontend"]
 	path = frontend
 	url = git@github.com:Clubs-Council-IIITH/frontend.git
+    ignore = all
 [submodule "backend"]
 	path = backend
 	url = git@github.com:Clubs-Council-IIITH/backend.git
+    ignore = all
