@@ -5,39 +5,26 @@ services:
     image: postgres:13.3-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-    environment:
-      - POSTGRES_USER=cc_admin
-      - POSTGRES_PASSWORD=cc_password
-      - POSTGRES_DB=cc_web
+    env_file:
+      - ./.env
   backend:
-    build:
-      context: ./backend
-      args:
-        DJANGO_DEBUG: 0
-        DJANGO_ALLOWED_HOSTS: localhost 127.0.0.1 api
-        DJANGO_SECRET_KEY: 6c_qpahp*wtf7!83^7ud@=hx+c+jjv@w27rup-ez1pxx@1=5^*
-        DJANGO_CORS_ORIGIN_WHITELIST: http://localhost http://127.0.0.1 http://api
-        DJANGO_DB_ENGINE: django.db.backends.postgresql
-        DJANGO_DB_NAME: cc_web
-        DJANGO_DB_USER: cc_admin
-        DJANGO_DB_PASSWORD: cc_password
-        DJANGO_DB_HOST: localhost
-        DJANGO_DB_PORT: ''
+    build: ./backend
     command: gunicorn backend.wsgi --bind 0.0.0.0:8000
     volumes:
       - media_volume:/backend/media
       - static_volume:/backend/django_static
     ports:
       - "8000:8000"
+    env_file:
+      - ./.env
     depends_on:
       - db
   frontend:
-    build:
-      context: ./frontend
-      args:
-        API_URL: http://localhost
+    build: ./frontend
     volumes:
       - build_folder:/frontend/build
+    env_file:
+      - ./.env
   nginx:
     image: nginx:latest
     ports:
