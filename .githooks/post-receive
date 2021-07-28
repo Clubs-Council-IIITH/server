@@ -1,7 +1,7 @@
 #!/bin/bash
 TARGET="/web"
 GIT_DIR="/home/git/server.git"
-BRANCH="automate-deployment"
+BRANCH="master"
 
 while read oldrev newrev ref
 do
