@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 case $1 in
-    run)
+    up)
         docker-compose -f docker-compose.dev.yml up --build "${@:2}"
         ;;
 
-    stop)
+    down)
         docker-compose -f docker-compose.dev.yml down  "${@:2}"
         ;;
 
