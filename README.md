@@ -17,6 +17,12 @@ git clone https://github.com/Clubs-Council-IIITH/backend.git
 git clone https://github.com/Clubs-Council-IIITH/frontend.git
 ```
 
+Copy .env file and set permissions for the manage script:
+```
+cp .env.example .env
+chmod a+x manage.sh
+```
+
 Build and spin up all services (`-d` to run in detached mode):
 ```
 ./manage.sh up -d
