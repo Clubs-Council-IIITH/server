@@ -11,7 +11,7 @@ case $1 in
 
     *)
         echo
-        echo "Usage: ./run.sh COMMAND [OPTIONS]"
+        echo "Usage: ./manage.sh COMMAND [OPTIONS]"
         echo
         echo "Commands:"
         echo "  start    Start all services."
