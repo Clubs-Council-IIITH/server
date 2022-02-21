@@ -11,14 +11,15 @@ services:
       - ./.env
 
   backend:
-    build: ./backend
+    image: python:3
     command: >
-      sh -c "cd live_backend &&
+      sh -c "pip install -r requirements.txt &&
              python manage.py makemigrations &&
              python manage.py migrate &&
              python manage.py runserver 0.0.0.0:8000"
     volumes:
-      - ./backend:/backend/live_backend
+      - ./backend:/live_backend
+    working_dir: /live_backend
     ports:
       - 8000:8000
     env_file:
@@ -27,14 +28,14 @@ services:
       - db
 
   frontend:
-    build: ./frontend
+    image: node:16.4.1
     command: >
-      sh -c "cd live_frontend && 
-             yarn && 
+      sh -c "yarn &&
              yarn start"
     network_mode: host
     volumes:
-      - ./frontend:/frontend/live_frontend
+      - ./frontend:/live_frontend
+    working_dir: /live_frontend
     ports:
       - 3000:3000
     env_file:
