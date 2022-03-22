@@ -28,11 +28,6 @@ Build and spin up all services (`-d` to run in detached mode):
 ./manage.sh up -d
 ```
 
-Use `docker ps` to identify the backend service's name and run initial database setup script:
-```
-docker exec -it <backend service name> sh -c "python manage.py shell < setup.py"
-```
-
 By default, the ReactJS app (with hot reload) is served at `http://localhost:3000`, while the GraphQL API is served at `http://localhost:8000`.
 
 To stop all running services belonging to this application (`-v` to remove all volumes):
