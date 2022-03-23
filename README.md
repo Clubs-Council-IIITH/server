@@ -17,24 +17,23 @@ git clone https://github.com/Clubs-Council-IIITH/backend.git
 git clone https://github.com/Clubs-Council-IIITH/frontend.git
 ```
 
-Copy .env file and set permissions for the manage script:
+Copy .env file and set permissions for the compose script:
 ```
 cp .env.example .env
-chmod a+x manage.sh
+chmod a+x compose.sh
 ```
 
 Build and spin up all services (`-d` to run in detached mode):
 ```
-./manage.sh up -d
+./compose.sh up -d
 ```
 
 By default, the ReactJS app (with hot reload) is served at `http://localhost:3000`, while the GraphQL API is served at `http://localhost:8000`.
 
 To stop all running services belonging to this application (`-v` to remove all volumes):
 ```
-./manage.sh down -v
+./compose.sh down -v
 ```
 
-## Manage Script
-The script [manage.sh](manage.sh) is a wrapper around the `docker-compose` script to use the right config yml for development.  
-It supports the commands `up` and `down`, and all options are propagated to `docker-compose`.
+## Compose Script
+The script [compose.sh](compose.sh) is a wrapper around the `docker-compose` script to use the right config yml for development.  
