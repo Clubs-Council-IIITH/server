@@ -1,5 +1,4 @@
 version: '3'
-
 services:
   db:
     image: postgres:13.3-alpine
@@ -23,29 +22,30 @@ services:
     depends_on:
       - db
 
-  frontend:
-    build: ./frontend
-    command: yarn build
-    volumes:
-      - build_folder:/frontend/build
-    env_file:
-      - ./.env
-
   nginx:
-    image: nginx:latest
+    image: nginx:1.15-alpine
     ports:
-      - 80:8080
+      - 80:80
+      - 443:443
     volumes:
-      - ./server/nginx-proxy.conf:/etc/nginx/conf.d/default.conf:ro
-      - build_folder:/var/www/frontend
+      - ./frontend/build:/var/www/html
       - media_volume:/backend/media
       - static_volume:/backend/django_static
+      - ./nginx:/etc/nginx/conf.d
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     depends_on:
       - backend
-      - frontend
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 
 volumes:
   postgres_data:
-  build_folder:
   media_volume:
   static_volume:
