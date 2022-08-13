@@ -35,8 +35,9 @@ docker-compose down -v
 ```
 
 ## Deployment (Prod Environment)
+Build and spin up all services (`-d` to run in detached mode):
 ```
-TODO
+docker compose -f docker-compose.prod.yml up --build -d
 ```
 
 ## Troubleshooting and Gotchas
