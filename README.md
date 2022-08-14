@@ -24,17 +24,25 @@ cp .env.example .env
 
 Build and spin up all services (`-d` to run in detached mode):
 ```
-docker-compose up --build -d
+docker compose up --build -d
 ```
 
 By default, the ReactJS app (with hot reload) is served at `http://localhost:3000`, while the GraphQL API is served at `http://localhost:8000`.
 
 To stop all running services belonging to this application (`-v` to remove all volumes):
 ```
-docker-compose down -v
+docker compose down -v
 ```
 
 ## Deployment (Prod Environment)
+(SSL) Create a dummy certificate, start nginx, delete the dummy certificates and request the real certificates:
+```
+chmod +x init-letsencrypt.sh
+sudo ./init-letsencrypt.sh
+```
+
+Uncomment the `entrypoint` line in `docker-compose.prod.yml` to enable automatic certificate renewal.
+
 Build and spin up all services (`-d` to run in detached mode):
 ```
 docker compose -f docker-compose.prod.yml up --build -d
