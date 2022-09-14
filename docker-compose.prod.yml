@@ -3,7 +3,6 @@ version: '3.8'
 volumes:
   postgres_data:
   build_volume:
-  media_volume:
   static_volume:
 
 services:
@@ -21,7 +20,7 @@ services:
       context: ./backend
       target: prod
     volumes:
-      - media_volume:/backend/media
+      - ./backend/media:/backend/media
       - static_volume:/backend/django_static
     ports:
       - 8000:8000
@@ -45,7 +44,7 @@ services:
     image: nginx:1.23-alpine
     volumes:
       - build_volume:/var/www/html
-      - media_volume:/backend/media
+      - ./backend/media:/backend/media
       - static_volume:/backend/django_static
       - ./nginx:/etc/nginx/conf.d
       - ./certbot/conf:/etc/letsencrypt
