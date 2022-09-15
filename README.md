@@ -35,13 +35,7 @@ docker compose down -v
 ```
 
 ## Deployment (Prod Environment)
-(SSL) Create a dummy certificate, start nginx, delete the dummy certificates and request the real certificates:
-```
-chmod +x init-letsencrypt.sh
-sudo ./init-letsencrypt.sh
-```
-
-Uncomment the `entrypoint` line in `docker-compose.prod.yml` to enable automatic certificate renewal.
+Make sure reverse proxy server is running (for SSL certs and subdomain routing).  
 
 Build and spin up all services (`-d` to run in detached mode):
 ```
