@@ -41,3 +41,16 @@ services:
       - ./.env
     entrypoint: /frontend/entrypoint.sh
     network_mode: host
+
+  mailing:
+    user: $UID:$GID
+    build:
+      context: ./mailing
+      target: base
+    volumes:
+      - ./mailing:/mailing
+    ports:
+      - 9000:9000
+    env_file:
+      - ./.env
+    entrypoint: /mailing/entrypoint.sh
