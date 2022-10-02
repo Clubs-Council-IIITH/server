@@ -15,6 +15,7 @@ Inside it, clone the application repositories:
 cd clubs_council
 git clone https://github.com/Clubs-Council-IIITH/backend.git
 git clone https://github.com/Clubs-Council-IIITH/frontend.git
+git clone https://github.com/Clubs-Council-IIITH/mailing.git
 ```
 
 Copy .env file:
