@@ -38,6 +38,20 @@ services:
     networks:
       - reverse_proxy
 
+  mailing:
+    build:
+      context: ./mailing
+      target: prod
+    ports:
+      - 9000:9000
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+    entrypoint: /mailing/entrypoint.prod.sh
+    networks:
+      - reverse_proxy
+
   frontend:
     build:
       context: ./frontend
