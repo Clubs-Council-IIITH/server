@@ -46,8 +46,6 @@ services:
       - 9000:9000
     env_file:
       - ./.env
-    depends_on:
-      - db
     entrypoint: /mailing/entrypoint.prod.sh
     networks:
       - reverse_proxy
