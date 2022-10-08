@@ -14,8 +14,6 @@ services:
     image: postgres:14.4-bullseye
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-    ports:
-      - 5432:5432
     env_file:
       - ./.env
     networks:
@@ -28,8 +26,6 @@ services:
     volumes:
       - ./backend/media:/backend/media
       - static_volume:/backend/django_static
-    ports:
-      - 8000:8000
     env_file:
       - ./.env
     depends_on:
@@ -42,8 +38,6 @@ services:
     build:
       context: ./mailing
       target: prod
-    ports:
-      - 9000:9000
     env_file:
       - ./.env
     entrypoint: /mailing/entrypoint.prod.sh
@@ -76,4 +70,5 @@ services:
       - VIRTUAL_HOST=clubs.iiit.ac.in
       - LETSENCRYPT_HOST=clubs.iiit.ac.in
     networks:
+      - default
       - reverse_proxy
